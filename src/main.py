@@ -1,5 +1,10 @@
 __author__ = "Vanshaj Jain"
 __version__ = "1.0.0"
+__copyright__ = "2026 Vanshaj Jain"
+__email__ = "dev.vanshaj@gmail.com"
+__description__ = "A Portfolio AI Agent that uses Gemini LLM to analyze financial data and provide insights."
+__maintainer__ = "Vanshaj Jain"
+
 
 from core.config import Config
 from data.database_manager import DatabaseManager
