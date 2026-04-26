@@ -11,7 +11,7 @@ from tools.sector_exposure_calculator import ExposureTool
 from agent.portfolio_ai_agent import PortfolioAgent
 
 
-def main():
+def main(): 
     # Initialize database connection
     db = DatabaseManager(Config.DB_FILE)
 
