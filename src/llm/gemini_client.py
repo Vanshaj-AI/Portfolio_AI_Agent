@@ -4,7 +4,7 @@ from core.config import Config
 class GeminiClient:
     def __init__(self):
         genai.configure(api_key=Config.GEMINI_API_KEY)
-        self.model = genai.GenerativeModel("gemini-2.5-flash")
+        self.model = genai.GenerativeModel("gemini-3-flash-preview")
 
     def generate(self, prompt: str, temperature: float = 0):
         response = self.model.generate_content(
