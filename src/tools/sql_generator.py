@@ -33,6 +33,15 @@ class SQLTool:
             if word in sql_upper:
                 raise Exception(f"Query permission denied due to Guardrail Policy. Forbidden operation detected: {word}")
 
+        if not sql_upper.strip():
+            raise Exception("Generated SQL query is empty.")
+
+        if ";" in sql_upper.strip()[:-1]:
+            raise Exception("Multiple SQL statements are not allowed.")
+
+        if "LIMIT" not in sql_upper:
+            sql_query += " LIMIT 100"
+
 
     def run(self, user_query: str):
         sql = self.generate_sql(user_query)

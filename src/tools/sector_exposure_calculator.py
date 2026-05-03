@@ -8,6 +8,10 @@ class ExposureTool:
         if len(portfolio_ids) == 0:
             raise Exception("Kindly retry and provide portfolio_id for Sector Exposure calculation.")
 
+        for i in portfolio_ids:
+            if type(i) is not int:
+                raise Exception("Portfolio id must be an integer.")
+
         query = f"""
         WITH holdings_grouped AS (
             SELECT portfolio_id, holding_id, security_id,
