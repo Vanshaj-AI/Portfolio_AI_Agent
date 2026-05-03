@@ -5,6 +5,9 @@ class ExposureTool:
     def calculate_sector_exposure(self, portfolio_ids):
         placeholders = ",".join(["?"] * len(portfolio_ids))
 
+        if len(portfolio_ids) == 0:
+            raise Exception("Kindly retry and provide portfolio_id for Sector Exposure calculation.")
+
         query = f"""
         WITH holdings_grouped AS (
             SELECT portfolio_id, holding_id, security_id,
