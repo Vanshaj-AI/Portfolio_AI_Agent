@@ -32,8 +32,6 @@ def initialize_agent():
 
 agent = initialize_agent()
 
-st.set_page_config(page_title="Portfolio AI Agent", layout="wide")
-
 st.title("📊 Portfolio AI Agent")
 st.write("Ask portfolio analytics questions using natural language.")
 
