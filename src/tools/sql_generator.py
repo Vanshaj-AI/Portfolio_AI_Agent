@@ -24,7 +24,18 @@ class SQLTool:
 
         return self.llm.generate(prompt)
 
+
+    def validate_query(self, sql_query: str):
+        forbidden_words = ['DROP', 'ALTER', 'UPDATE', 'CREATE', 'TRUNCATE', 'DELETE', 'INSERT']
+        sql_upper = sql_query.upper()
+
+        for word in forbidden_words:
+            if word in sql_upper:
+                raise Exception(f"Query permission denied due to Guardrail Policy. Forbidden operation detected: {word}")
+
+
     def run(self, user_query: str):
         sql = self.generate_sql(user_query)
+        self.validate_query(sql)
         print(f"Generated SQL: {sql}\n")
         return self.db.execute_query(sql)
