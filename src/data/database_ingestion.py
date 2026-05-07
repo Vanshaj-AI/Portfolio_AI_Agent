@@ -15,12 +15,7 @@ class DataIngestion:
 
                 df = pd.read_csv(file_path)
 
-                df.to_sql(
-                    table_name,
-                    self.db.conn,
-                    if_exists="replace",
-                    index=False
-                )
+                df.to_sql(table_name, self.db.conn, if_exists="replace", index=False)
 
                 print(f"Loaded {file} into {table_name}")
 

@@ -3,7 +3,7 @@ import pandas as pd
 
 class DatabaseManager:
     def __init__(self, db_path: str):
-        self.conn = sqlite3.connect(db_path)
+        self.conn = sqlite3.connect(db_path, check_same_thread=False)
 
     def execute_query(self, query: str, params=None) -> pd.DataFrame:
         return pd.read_sql(query, self.conn, params=params)
