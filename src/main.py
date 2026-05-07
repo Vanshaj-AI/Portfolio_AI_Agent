@@ -25,9 +25,9 @@ def main():
     # Create database schema
     db.execute_script(Config.SCHEMA_FILE)
 
-    # Load CSV files into database
-    ingestion = DataIngestion(db, Config.CSV_FOLDER)
-    ingestion.load_csvs_to_database()
+    # Load CSV files into database (One Full Load required only)
+    # ingestion = DataIngestion(db, Config.CSV_FOLDER)
+    # ingestion.load_csvs_to_database()
 
     # Initialize schema manager and LLM
     schema = SchemaManager(db)
