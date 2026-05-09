@@ -105,8 +105,9 @@ portfolio_ai_agent/
 ## 1. Clone Repository
 
 ```bash
-git clone <your_repo_url>
-cd portfolio_ai_agent
+git clone https://github.com/Vanshaj-AI/Portfolio_AI_Agent.git
+cd portfolio_ai_agent/src
+streamlit run streamlit_app.py
 ```
 
 ---
