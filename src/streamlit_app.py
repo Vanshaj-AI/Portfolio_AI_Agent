@@ -1,6 +1,7 @@
 import streamlit as st
 
 from core.config import Config
+from core.logger import setup_logger
 from data.database_manager import DatabaseManager
 from data.schema_manager import SchemaManager
 from data.database_ingestion import DataIngestion
@@ -11,16 +12,19 @@ from agent.portfolio_ai_agent import PortfolioAgent
 
 st.set_page_config(page_title="Portfolio AI Agent", layout="wide")
 
+logger = setup_logger(__name__)
+
 @st.cache_resource
 def initialize_agent():
     db = DatabaseManager(Config.DB_FILE)
 
     # Optional first-time setup
-    db.execute_script(Config.SCHEMA_FILE)
-
-    ingestion = DataIngestion(db, Config.CSV_FOLDER)
-    ingestion.load_csvs_to_database()
-
+    # db.execute_script(Config.SCHEMA_FILE)
+    #
+    # ingestion = DataIngestion(db, Config.CSV_FOLDER)
+    # ingestion.load_csvs_to_database()
+    logger.info(f"Database initialized successfully")
+    logger.info(f"Initializing agent")
     schema = SchemaManager(db)
     llm = GeminiClient()
 

@@ -8,9 +8,10 @@ __maintainer__ = "Vanshaj Jain"
 ############################################################
 
 from core.config import Config
+from core.logger import setup_logger
 from data.database_manager import DatabaseManager
 from data.schema_manager import SchemaManager
-from data.database_ingestion import DataIngestion
+# from data.database_ingestion import DataIngestion
 from llm.gemini_client import GeminiClient
 from tools.sql_generator import SQLTool
 from tools.sector_exposure_calculator import ExposureTool
@@ -18,12 +19,14 @@ from agent.portfolio_ai_agent import PortfolioAgent
 
 ############################################################
 
+logger = setup_logger(__name__)
+
 def main(): 
     # Initialize database connection
     db = DatabaseManager(Config.DB_FILE)
-
-    # Create database schema
-    db.execute_script(Config.SCHEMA_FILE)
+    #
+    # # Create database schema
+    # db.execute_script(Config.SCHEMA_FILE)
 
     # Load CSV files into database (One Full Load required only)
     # ingestion = DataIngestion(db, Config.CSV_FOLDER)
@@ -37,6 +40,7 @@ def main():
     sql_tool = SQLTool(llm, schema, db)
     exposure_tool = ExposureTool(db)
 
+    logger.info("Initializing agent")
     # Initialize agent
     agent = PortfolioAgent(llm, sql_tool, exposure_tool)
 
